@@ -1,35 +1,76 @@
 const router = require('express').Router();
+const passport = require('passport');
 
 // const { adminRegister, adminLogIn, deleteAdmin, getAdminDetail, updateAdmin } = require('../controllers/admin-controller.js');
 
-const { adminRegister, adminLogIn, getAdminDetail} = require('../controllers/admin-controller.js');
-
-const { sclassCreate, sclassList, deleteSclass, deleteSclasses, getSclassDetail, getSclassStudents } = require('../controllers/class-controller.js');
-const { complainCreate, complainList } = require('../controllers/complain-controller.js');
-const { noticeCreate, noticeList, deleteNotices, deleteNotice, updateNotice } = require('../controllers/notice-controller.js');
 const {
-    studentRegister,
-    studentLogIn,
-    getStudents,
-    getStudentDetail,
-    deleteStudents,
-    deleteStudent,
-    updateStudent,
-    studentAttendance,
-    deleteStudentsByClass,
-    updateExamResult,
-    clearAllStudentsAttendanceBySubject,
-    clearAllStudentsAttendance,
-    removeStudentAttendanceBySubject,
-    removeStudentAttendance } = require('../controllers/student_controller.js');
-const { subjectCreate, classSubjects, deleteSubjectsByClass, getSubjectDetail, deleteSubject, freeSubjectList, allSubjects, deleteSubjects } = require('../controllers/subject-controller.js');
-const { teacherRegister, teacherLogIn, getTeachers, getTeacherDetail, deleteTeachers, deleteTeachersByClass, deleteTeacher, updateTeacherSubject, teacherAttendance } = require('../controllers/teacher-controller.js');
+  adminRegister,
+  adminLogIn,
+  getAdminDetail,
+} = require('../controllers/admin-controller.js');
+
+const {
+  sclassCreate,
+  sclassList,
+  deleteSclass,
+  deleteSclasses,
+  getSclassDetail,
+  getSclassStudents,
+} = require('../controllers/class-controller.js');
+const {
+  complainCreate,
+  complainList,
+} = require('../controllers/complain-controller.js');
+const {
+  noticeCreate,
+  noticeList,
+  deleteNotices,
+  deleteNotice,
+  updateNotice,
+} = require('../controllers/notice-controller.js');
+const {
+  studentRegister,
+  studentLogIn,
+  getStudents,
+  getStudentDetail,
+  deleteStudents,
+  deleteStudent,
+  updateStudent,
+  studentAttendance,
+  deleteStudentsByClass,
+  updateExamResult,
+  clearAllStudentsAttendanceBySubject,
+  clearAllStudentsAttendance,
+  removeStudentAttendanceBySubject,
+  removeStudentAttendance,
+} = require('../controllers/student_controller.js');
+const {
+  subjectCreate,
+  classSubjects,
+  deleteSubjectsByClass,
+  getSubjectDetail,
+  deleteSubject,
+  freeSubjectList,
+  allSubjects,
+  deleteSubjects,
+} = require('../controllers/subject-controller.js');
+const {
+  teacherRegister,
+  teacherLogIn,
+  getTeachers,
+  getTeacherDetail,
+  deleteTeachers,
+  deleteTeachersByClass,
+  deleteTeacher,
+  updateTeacherSubject,
+  teacherAttendance,
+} = require('../controllers/teacher-controller.js');
 
 // Admin
 router.post('/AdminReg', adminRegister);
 router.post('/AdminLogin', adminLogIn);
 
-router.get("/Admin/:id", getAdminDetail)
+router.get('/Admin/:id', getAdminDetail);
 // router.delete("/Admin/:id", deleteAdmin)
 
 // router.put("/Admin/:id", updateAdmin)
@@ -37,42 +78,45 @@ router.get("/Admin/:id", getAdminDetail)
 // Student
 
 router.post('/StudentReg', studentRegister);
-router.post('/StudentLogin', studentLogIn)
+router.post('/StudentLogin', studentLogIn);
 
-router.get("/Students/:id", getStudents)
-router.get("/Student/:id", getStudentDetail)
+router.get('/Students/:id', getStudents);
+router.get('/Student/:id', getStudentDetail);
 
-router.delete("/Students/:id", deleteStudents)
-router.delete("/StudentsClass/:id", deleteStudentsByClass)
-router.delete("/Student/:id", deleteStudent)
+router.delete('/Students/:id', deleteStudents);
+router.delete('/StudentsClass/:id', deleteStudentsByClass);
+router.delete('/Student/:id', deleteStudent);
 
-router.put("/Student/:id", updateStudent)
+router.put('/Student/:id', updateStudent);
 
-router.put('/UpdateExamResult/:id', updateExamResult)
+router.put('/UpdateExamResult/:id', updateExamResult);
 
-router.put('/StudentAttendance/:id', studentAttendance)
+router.put('/StudentAttendance/:id', studentAttendance);
 
-router.put('/RemoveAllStudentsSubAtten/:id', clearAllStudentsAttendanceBySubject);
+router.put(
+  '/RemoveAllStudentsSubAtten/:id',
+  clearAllStudentsAttendanceBySubject
+);
 router.put('/RemoveAllStudentsAtten/:id', clearAllStudentsAttendance);
 
 router.put('/RemoveStudentSubAtten/:id', removeStudentAttendanceBySubject);
-router.put('/RemoveStudentAtten/:id', removeStudentAttendance)
+router.put('/RemoveStudentAtten/:id', removeStudentAttendance);
 
 // Teacher
 
 router.post('/TeacherReg', teacherRegister);
-router.post('/TeacherLogin', teacherLogIn)
+router.post('/TeacherLogin', teacherLogIn);
 
-router.get("/Teachers/:id", getTeachers)
-router.get("/Teacher/:id", getTeacherDetail)
+router.get('/Teachers/:id', getTeachers);
+router.get('/Teacher/:id', getTeacherDetail);
 
-router.delete("/Teachers/:id", deleteTeachers)
-router.delete("/TeachersClass/:id", deleteTeachersByClass)
-router.delete("/Teacher/:id", deleteTeacher)
+router.delete('/Teachers/:id', deleteTeachers);
+router.delete('/TeachersClass/:id', deleteTeachersByClass);
+router.delete('/Teacher/:id', deleteTeacher);
 
-router.put("/TeacherSubject", updateTeacherSubject)
+router.put('/TeacherSubject', updateTeacherSubject);
 
-router.post('/TeacherAttendance/:id', teacherAttendance)
+router.post('/TeacherAttendance/:id', teacherAttendance);
 
 // Notice
 
@@ -80,10 +124,10 @@ router.post('/NoticeCreate', noticeCreate);
 
 router.get('/NoticeList/:id', noticeList);
 
-router.delete("/Notices/:id", deleteNotices)
-router.delete("/Notice/:id", deleteNotice)
+router.delete('/Notices/:id', deleteNotices);
+router.delete('/Notice/:id', deleteNotice);
 
-router.put("/Notice/:id", updateNotice)
+router.put('/Notice/:id', updateNotice);
 
 // Complain
 
@@ -96,12 +140,12 @@ router.get('/ComplainList/:id', complainList);
 router.post('/SclassCreate', sclassCreate);
 
 router.get('/SclassList/:id', sclassList);
-router.get("/Sclass/:id", getSclassDetail)
+router.get('/Sclass/:id', getSclassDetail);
 
-router.get("/Sclass/Students/:id", getSclassStudents)
+router.get('/Sclass/Students/:id', getSclassStudents);
 
-router.delete("/Sclasses/:id", deleteSclasses)
-router.delete("/Sclass/:id", deleteSclass)
+router.delete('/Sclasses/:id', deleteSclasses);
+router.delete('/Sclass/:id', deleteSclass);
 
 // Subject
 
@@ -110,10 +154,57 @@ router.post('/SubjectCreate', subjectCreate);
 router.get('/AllSubjects/:id', allSubjects);
 router.get('/ClassSubjects/:id', classSubjects);
 router.get('/FreeSubjectList/:id', freeSubjectList);
-router.get("/Subject/:id", getSubjectDetail)
+router.get('/Subject/:id', getSubjectDetail);
 
-router.delete("/Subject/:id", deleteSubject)
-router.delete("/Subjects/:id", deleteSubjects)
-router.delete("/SubjectsClass/:id", deleteSubjectsByClass)
+router.delete('/Subject/:id', deleteSubject);
+router.delete('/Subjects/:id', deleteSubjects);
+router.delete('/SubjectsClass/:id', deleteSubjectsByClass);
+
+// ========================================= Oauth =========================================
+router.get(
+  '/auth/google',
+  passport.authenticate('google', { scope: ['profile', 'email'] })
+);
+// Callback after Google login
+router.get(
+  '/auth/google/callback',
+  passport.authenticate('google', { failureRedirect: '/login-failure' }),
+  (req, res) => {
+    // res.json({
+    //   message: 'Google login successful!',
+    //   user: req.user,
+    // });
+    const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:3000';
+    res.redirect(`${FRONTEND_URL}/oauth/success`);
+  }
+);
+// Optional: Logout
+router.get('/auth/logout', (req, res) => {
+  req.logout(() => {
+    res.json({ message: 'Logged out' });
+  });
+});
+
+// Who am I? (used by SPA after redirect)
+router.get('/auth/me', (req, res) => {
+  if (req.isAuthenticated && req.isAuthenticated()) {
+    // Shape it however you want for the frontend
+    const profile = {
+      id: req.user.id,
+      displayName: req.user.displayName,
+      email: req.user.emails?.[0]?.value,
+      photo: req.user.photos?.[0]?.value,
+      provider: req.user.provider,
+    };
+    return res.json({ user: profile });
+  }
+  return res.status(401).json({ message: 'Not authenticated' });
+});
+
+// Optional: Login failure
+router.get('/login-failure', (req, res) => {
+  res.status(401).json({ message: 'Google login failed' });
+});
+// ========================================= Oauth End =========================================
 
 module.exports = router;
