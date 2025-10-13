@@ -1,14 +1,32 @@
 const Notice = require('../models/noticeSchema.js');
+const Admin = require('../models/adminSchema.js');
+const mongoose = require("mongoose");
 
 const noticeCreate = async (req, res) => {
     try {
+
+        console.log(req.user);
+        
+        // Check mongodb ID format
+        if (!mongoose.Types.ObjectId.isValid(req.body.adminID)) {
+            return res.status(400).json({ data: "Invalid admin ID" });
+        }
+
+        // Check is admin
+        const admin = await Admin.findById(req.body.adminID);
+        if (!admin) {
+            return res.status(403).json({ data: "Unauthorized" });
+        }
+
         const notice = new Notice({
             ...req.body,
             school: req.body.adminID
         })
         const result = await notice.save()
         res.send(result)
+        
     } catch (err) {
+        console.log(err);
         res.status(500).json(err);
     }
 };
